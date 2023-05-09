@@ -1,8 +1,9 @@
+// eslint-lint-disable no-continue
 import 'dotenv/config';
 import prompt from 'prompt';
-import { chatWithGPT } from './services/openai';
-import getDb from './services/db';
-import { getUserInput } from './services/utils';
+import { chatWithGPT } from './services/openai.ts';
+import getDb from './services/db.ts';
+import { getUserInput } from './services/utils.ts';
 
 prompt.start();
 
@@ -18,12 +19,11 @@ const chat = async () => {
   console.log('Welcome to ChatGPT CLI! Type your message and press Enter.');
   const context = [];
   while (true) {
+    // eslint-disable-next-line no-await-in-loop
     const userInput = await getUserInput();
     if (typeof userInput === 'string' && userInput.toLowerCase() === 'exit') {
       console.log('Goodbye!');
-      setTimeout(() => {
-        process.exit(0);
-      }, 500);
+      process.exit(0);
       break;
     }
     if (userInput === null || userInput === undefined || userInput === '') {
@@ -32,13 +32,20 @@ const chat = async () => {
 
     // Call your chat function here, for example:
     spinner.start();
+    // eslint-disable-next-line no-await-in-loop
     const response = await chatWithGPT(userInput as string, context);
     spinner.stop();
-    context.push({ role: 'user', content: userInput });
-    context.push({ role: 'system', content: response });
+    context.push({
+      role: 'user', content: userInput
+    });
+    context.push({
+      role: 'system', content: response
+    });
     console.log(`ChatGPT: ${response}`);
 
-    DB.data.history[sessionId].push({ input: userInput, output: response });
+    DB.data.history[sessionId].push({
+      input: userInput, output: response
+    });
     DB.write();
   }
 };

@@ -6,7 +6,9 @@ async function init(db: any) {
   if (db) {
     return db;
   }
+  // eslint-disable-next-line import/no-unresolved
   const { Low } = await import('lowdb');
+  // eslint-disable-next-line import/no-unresolved
   const { JSONFile } = await import('lowdb/node');
 
   // db.json file path

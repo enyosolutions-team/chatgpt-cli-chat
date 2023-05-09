@@ -1,5 +1,8 @@
-import { Configuration, OpenAIApi } from 'openai';
-import { promptForApiKey } from './utils';
+import {
+  Configuration, OpenAIApi
+} from 'openai';
+import { promptForApiKey } from './utils.ts';
+
 let apiKey = process.env.OPEN_API_API_KEY || '';
 
 if (!apiKey) {
@@ -10,9 +13,7 @@ if (!apiKey) {
     .catch(console.error);
 }
 // OpenAI configuration creation
-const configuration = new Configuration({
-  apiKey,
-});
+const configuration = new Configuration({apiKey,});
 // OpenAI instance creation
 export const openai = new OpenAIApi(configuration);
 
@@ -23,11 +24,15 @@ export async function chatWithGPT(
   try {
     console.log('Sending message to GPT:', [
       ...context,
-      { role: 'user', content: message },
+      {
+        role: 'user', content: message
+      },
     ]);
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
-      messages: [...context, { role: 'user', content: message }],
+      messages: [...context, {
+        role: 'user', content: message
+      }],
       max_tokens: 800,
       n: 1,
       stop: null,

@@ -1,11 +1,17 @@
+/** eslint-lint-disable no-shadow  */
 import 'dotenv/config';
 import prompt from 'prompt';
 import { join } from 'node:path';
 import { debug as Debug } from 'debug';
-import { openai } from './services/openai';
-import getDb from './services/db';
-import { getUserInput, checkForExitInput } from './services/utils';
-import { writeFileSync, createReadStream } from 'fs';
+import {
+  writeFileSync, createReadStream
+} from 'fs';
+
+import { openai } from './services/openai.ts';
+import getDb from './services/db.ts';
+import {
+  getUserInput, checkForExitInput
+} from './services/utils.ts';
 
 const debug = Debug('chat:finetuning');
 let fileToUpload = process.argv[2];
@@ -18,8 +24,8 @@ prompt.start();
  */
 async function inputTrainingData(): Promise<
   { prompt: string; completion: string }[]
-> {
-  let trainingData = [];
+  > {
+  const trainingData = [];
   let isInputtingData = true;
   while (isInputtingData) {
     console.log(
@@ -44,7 +50,9 @@ async function inputTrainingData(): Promise<
       isInputtingData = false;
       break;
     }
-    trainingData.push({ prompt: input, completion });
+    trainingData.push({
+      prompt: input, completion
+    });
   }
   return trainingData;
 }
@@ -64,11 +72,13 @@ const chat = async () => {
     console.log('Existing fine tuning models:');
     debug(existingTuningList);
     console.table(
-      existingTuningList.map(({ id, model, status, fine_tuned_model }) => ({
+      existingTuningList.map(({
+        id, model, status, fine_tuned_model // eslint-disable-line camelcase
+      }) => ({
         id,
         model,
         status,
-        fine_tuned_model,
+        fine_tuned_model, // eslint-disable-line camelcase
       })),
     );
 
@@ -93,7 +103,9 @@ const chat = async () => {
       // create and upload the training file content
       const trainingFileContent = trainingData
         .map(
-          ({ prompt, completion }) =>
+          ({
+            prompt, completion // eslint-disable-line no-shadow
+          }) =>
             `{"prompt": "${prompt}", "completion": "${completion}"}`,
         )
         .join('\n');

@@ -1,6 +1,7 @@
 import prompt from 'prompt';
 import { writeFileSync } from 'node:fs';
 
+// eslint-disable-next-line
 type GetUserInputFunction = (inputName?: string) => Promise<string>;
 
 export const getUserInput: GetUserInputFunction = (inputName = 'input') =>
