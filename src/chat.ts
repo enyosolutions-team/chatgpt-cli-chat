@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // eslint-lint-disable no-continue
 import 'dotenv/config';
 import prompt from 'prompt';
@@ -5,7 +6,7 @@ import { chatWithGPT } from './services/openai.ts';
 import getDb from './services/db.ts';
 import { getUserInput } from './services/utils.ts';
 
-let model = process.argv[2] || 'gpt-3.5-turbo';
+const model = process.argv[2] || 'gpt-3.5-turbo';
 prompt.start();
 
 const chat = async () => {

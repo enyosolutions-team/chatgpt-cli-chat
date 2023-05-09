@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /** eslint-lint-disable no-shadow  */
 import 'dotenv/config';
 import prompt from 'prompt';

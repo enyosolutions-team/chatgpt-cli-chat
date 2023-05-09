@@ -35,7 +35,7 @@
     "tune:dev": "nodemon src/finetuning.ts",
     "clean": "rimraf coverage build tmp",
     "prebuild": "npm run lint",
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && chmod +x build/src/*",
     "build:watch": "tsc -w -p tsconfig.json",
     "build:release": "npm run clean && tsc -p tsconfig.release.json",
     "lint": "eslint . --ext .ts --ext .mts",
@@ -61,6 +61,10 @@
   },
   "volta": {
     "node": "18.12.1"
+  },
+  "bin": {
+    "chatgpt": "./build/src/chat.js",
+    "tunegpt": "./build/src/finetune.js"
   },
   "nodemonConfig": {
     "ignore": [

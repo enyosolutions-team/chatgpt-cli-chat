@@ -20,15 +20,15 @@ export const openai = new OpenAIApi(configuration);
 export async function chatWithGPT(
   message: string,
   context = [],
-  model?:string = 'gpt-3.5-turbo',
+  model = 'gpt-3.5-turbo',
 ): Promise<string> {
   try {
-    console.log('Sending message to GPT:', [
-      ...context,
-      {
-        role: 'user', content: message
-      },
-    ]);
+    // console.log('Sending message to GPT:', [
+    //   ...context,
+    //   {
+    //     role: 'user', content: message
+    //   },
+    // ]);
     const response = await openai.createChatCompletion({
       model,
       messages: [...context, {
