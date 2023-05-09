@@ -61,6 +61,20 @@ npm run chat
 yarn chat
 ```
 
+you can also choose your model
+
+```
+npm run chat <model name>
+```
+
+Eg
+
+```
+npm run chat gpt4
+# or
+npm run chat <mycustom trained model>
+```
+
 You will be prompted to enter your message or question. Type your input and press Enter to receive a response from the AI-powered language model.
 
 You can also fine tune

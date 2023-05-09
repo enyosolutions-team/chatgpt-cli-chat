@@ -5,6 +5,7 @@ import { chatWithGPT } from './services/openai.ts';
 import getDb from './services/db.ts';
 import { getUserInput } from './services/utils.ts';
 
+let model = process.argv[2] || 'gpt-3.5-turbo';
 prompt.start();
 
 const chat = async () => {
@@ -33,7 +34,7 @@ const chat = async () => {
     // Call your chat function here, for example:
     spinner.start();
     // eslint-disable-next-line no-await-in-loop
-    const response = await chatWithGPT(userInput as string, context);
+    const response = await chatWithGPT(userInput as string, context, model);
     spinner.stop();
     context.push({
       role: 'user', content: userInput
